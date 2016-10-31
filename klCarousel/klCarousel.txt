@@ -1,0 +1,32 @@
+klCarousel使用方法，先引入jquery在引入klCarousel.js文件
+html里面 放<div id="klCarousel"></div> 
+
+调用方式 如下，var klCarousel =   可以不写，可以直接就 new KlCarousel.carousel。
+如果一个页面多次的调用就需要写var 什么什么 = new KlCarousel.carousel。名字随便起，只要不一样就OK
+
+el后面跟的是 上面div的id 
+
+可以在 klCarousel.html里面看示例。
+
+css就是html里面的那些css，可以根据需求改改 图片索引 大小颜色 位置  和 上下翻图片的两个按钮的大小 位置 
+
+var klCarousel = new KlCarousel.carousel({
+    //目标位置
+    el:$('#klCarousel'),
+    //轮播图片
+    imgArr   : [],
+    //点击图片跳转的链接 根据图片的索引 放，不能n个图片n+1个链接，
+    a:[],
+    //图片索引  false就是取消索引
+    indexs    : true, 
+    //鼠标操作翻页  不要翻页的画 留一个空数组，示例 upDown : [],
+    upDown : ["left.png","right.png"],
+    //图片高
+    imgHeight:'',
+    //图片宽
+    imgWidth:'',
+    //换一个图片的动画需要的时间， 这个时间一定要小于图片轮播的时间，也就是下面setIntervals
+    imgTime:1000,
+    //多久轮播一下
+    setIntervals:2000,
+});

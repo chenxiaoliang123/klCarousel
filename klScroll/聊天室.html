@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<style>
+	#mainBox{ 
+		width: 300px;
+	    height: 300px;
+	    position: relative;
+	    color: #666;
+	    margin:200px auto;
+	    border: 1px solid #ccc; 
+	}
+	#content{
+		padding:0 10px; 
+		height: 100%;
+    	overflow: hidden
+	}
+	#content p{
+		word-break: break-all;
+		line-height: 1.3;
+	}
+	.scroll-bar {
+	    position: absolute;
+	    top: 0;
+	    right: 0;
+	    width: 10px;
+	    height: 100%;
+	    background-color: #eee;
+	}
+	.scroll-slider {
+	    position: absolute;
+	    top: 0;
+	    left: 1px;
+	    width: 8px;
+	    height: 30px;
+	    background-color: #ccc;
+	    border-radius: 4px;
+	}
+
+
+
+	#btn{
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		background-color: #eb3454;
+		text-align: center;
+		line-height: 100px;
+		font-size: 16px;
+		color: #fff;
+		position: fixed;
+		right: 10px;
+		bottom:10px; 
+	}
+</style>
+<div id="btn">发送</div>
+<div id="mainBox" class="bar-mainBox">
+	<div id="content" class="bar-content">	
+		
+	</div>
+	<div class="scroll-bar">
+		<div class="scroll-slider"></div>
+	</div>
+</div>
+<script src="jquery-1.8.3.min.js"></script>
+<script src="klScroll.js"></script>
+<script>
+	var scro = new Scroll.CusScrollBar({
+	    contSelector   : ".bar-content",   
+	    barSelector    : ".scroll-bar",    
+	    sliderSelector : ".scroll-slider"
+	});
+
+	$('#btn').on('click',function(){
+		var $html = '<p>北宋。潘金莲相貌美艳，曾是地主家的丫鬟，后被地主强奸，因遭到地主婆捉奸在床，被惩罚，嫁给了当地最丑的男人武大郎，武大郎身材矮小，房事能力差，不能满足潘金莲的性欲。西门庆在王婆家掀起帘子偷看潘金莲洗澡，心动不已'+new Date().getTime()+'</p>';
+		$('#content').append( $html );
+		scro.scrollContTo( scro.getMaxScrollPosition() );
+	})
+</script>
+</body>
+</html>
