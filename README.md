@@ -1,5 +1,5 @@
 # klCarousel
-轮播图(基于jquery)的无缝轮播图
+pc轮播图(基于jquery适用pc页面)的无缝轮播图
 
 
 //使用方式
