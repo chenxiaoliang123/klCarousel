@@ -1,5 +1,5 @@
 # pc轮播图(基于jquery适用pc页面)的无缝轮播图 --klCarousel
-# pc轮播图(基于jquery适用pc页面)的无缝轮播图
+
 
 
 #使用方式
@@ -8,11 +8,11 @@
 <script src="jquery-1.8.3.min.js"></script>
 <script src="klCarousel.js"></script>
 
-//html部分
+#html部分
 
 <div id="klCarousel"></div> //这里的id随便起 也可以是aaa
 
-js部分
+#js部分
 
 //这个var klCarousel = 可以不写 可以直接 new KlCarousel.carousel({ 
 
