@@ -1,8 +1,8 @@
-# klCarousel
-pc轮播图(基于jquery适用pc页面)的无缝轮播图
+# pc轮播图(基于jquery适用pc页面)的无缝轮播图 --klCarousel
+# pc轮播图(基于jquery适用pc页面)的无缝轮播图
 
 
-//使用方式
+#使用方式
 
 //引入js文件  jquery 一定要在klCarousel上面引入
 <script src="jquery-1.8.3.min.js"></script>
