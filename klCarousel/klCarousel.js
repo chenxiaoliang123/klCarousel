@@ -1,4 +1,4 @@
-﻿/*
+/*
  *KlCarousel 轮播插件
  *0.0.1 
  *2016-10-16 18:49
@@ -48,16 +48,16 @@
                 width:self.options.imgWidth,
                 height:self.options.imgHeight
             });
-            $('.klCarousel-box li').css({
+            self.options.el.find('.klCarousel-box li').css({
                 width:self.options.imgWidth,
                 height:self.options.imgHeight
             })
-            $('.klCarousel-box img').css({
+            self.options.el.find('.klCarousel-box img').css({
                 width:self.options.imgWidth,
                 height:self.options.imgHeight
             })
             /*此处很关键，在实现无疑轮播时这个宽度一定要比显示图片数量+1的宽度宽*/
-            $('.klCarousel-box').css('width',(self.options.imgArr.length + 1) * parseInt(self.options.imgWidth) + 'px');
+            self.options.el.find('.klCarousel-box').css('width',(self.options.imgArr.length + 1) * parseInt(self.options.imgWidth) + 'px');
             //这里调用了轮播
             self.setIn = setInterval(function(){self._carousel()},self.options.setIntervals);
         },
@@ -68,31 +68,31 @@
             }else{
                 var $html = '<div class="klCarousel-up"><img src="'+self.options.upDown[0]+'"></div><div class="klCarousel-next"><img src="'+self.options.upDown[1]+'"></div>';
                 self.options.el.append($html);
-                $('#klCarousel').on('click','.klCarousel-next',function(){
+                self.options.el.on('click','.klCarousel-next',function(){
                     clearInterval(self.setIn);
-                    var $left = parseInt($(".klCarousel-box").css('margin-left'));
+                    var $left = parseInt(self.options.el.find(".klCarousel-box").css('margin-left'));
                     if ($left > -(parseInt(self.options.imgWidth) * (self.options.imgArr.length - 1))) {
                         $left -=  parseInt(self.options.imgWidth);
-                        $(".klCarousel-box").css('margin-left',$left+'px');
-                        $('.klIndex-index') ? $('.klIndex-index').eq(-($left / parseInt(self.options.imgWidth))).addClass('klactive').siblings().removeClass('klactive') : false;
+                        self.options.el.find(".klCarousel-box").css('margin-left',$left+'px');
+                        self.options.el.find('.klIndex-index') ? self.options.el.find('.klIndex-index').eq(-($left / parseInt(self.options.imgWidth))).addClass('klactive').siblings().removeClass('klactive') : false;
                     }else{
                         $left = 0;
-                        $(".klCarousel-box").css('margin-left',$left+'px');
-                        $('.klIndex-index') ? $('.klIndex-index').eq(0).addClass('klactive').siblings().removeClass('klactive') : false; 
+                        self.options.el.find(".klCarousel-box").css('margin-left',$left+'px');
+                        self.options.el.find('.klIndex-index') ? self.options.el.find('.klIndex-index').eq(0).addClass('klactive').siblings().removeClass('klactive') : false; 
                     }
                     self.setIn = setInterval(function(){self._carousel()}, self.options.setIntervals);
                 })
-                $('#klCarousel').on('click','.klCarousel-up',function(){
+                self.options.el.on('click','.klCarousel-up',function(){
                     clearInterval(self.setIn);
-                    var $left = parseInt($(".klCarousel-box").css('margin-left'));
+                    var $left = parseInt(self.options.el.find(".klCarousel-box").css('margin-left'));
                     if ($left < 0) {
                         $left += parseInt(self.options.imgWidth);
-                        $(".klCarousel-box").css('margin-left',$left+'px');
-                        $('.klIndex-index') ? $('.klIndex-index').eq(-($left / parseInt(self.options.imgWidth))).addClass('klactive').siblings().removeClass('klactive') : false;
+                        self.options.el.find(".klCarousel-box").css('margin-left',$left+'px');
+                        self.options.el.find('.klIndex-index') ? self.options.el.find('.klIndex-index').eq(-($left / parseInt(self.options.imgWidth))).addClass('klactive').siblings().removeClass('klactive') : false;
                     }else{
                         $left = -(parseInt(self.options.imgWidth) * (self.options.imgArr.length - 1));
-                        $(".klCarousel-box").css('margin-left',$left+'px');
-                        $('.klIndex-index') ? $('.klIndex-index').eq(self.options.imgArr.length - 1).addClass('klactive').siblings().removeClass('klactive') : false;
+                        self.options.el.find(".klCarousel-box").css('margin-left',$left+'px');
+                        self.options.el.find('.klIndex-index') ? self.options.el.find('.klIndex-index').eq(self.options.imgArr.length - 1).addClass('klactive').siblings().removeClass('klactive') : false;
                     }
                     self.setIn = setInterval(function(){self._carousel()}, self.options.setIntervals);
                 })
@@ -107,17 +107,17 @@
                 }
                 $html += '</div></div>';
                 self.options.el.append($html);
-                $('.klIndex-index').eq(0).addClass('klactive');
-                $('.klIndex').css({
-                    'margin-top':(parseInt($('.klIndex-box').css('height'))-parseInt($('.klIndex').css('height'))) / 2 + 'px',
-                    'margin-left':(parseInt($('.klIndex-box').css('width'))-parseInt($('.klIndex').css('width'))) / 2 + 'px'
+                self.options.el.find('.klIndex-index').eq(0).addClass('klactive');
+                self.options.el.find('.klIndex').css({
+                    'margin-top':(parseInt(self.options.el.find('.klIndex-box').css('height'))-parseInt(self.options.el.find('.klIndex').css('height'))) / 2 + 'px',
+                    'margin-left':(parseInt(self.options.el.find('.klIndex-box').css('width'))-parseInt(self.options.el.find('.klIndex').css('width'))) / 2 + 'px'
                 });
-                $('#klCarousel').on('click','.klIndex-index',function(){
+                self.options.el.on('click','.klIndex-index',function(){
                     clearInterval(self.setIn)
                     var $num = $(this).index();
                     var $left = -($num * parseInt(self.options.imgWidth))+'px';
                     $(this).addClass('klactive').siblings().removeClass('klactive');
-                    $(".klCarousel-box").css('margin-left',$left);
+                    self.options.el.find(".klCarousel-box").css('margin-left',$left);
                     self.setIn = setInterval(function(){self._carousel()}, self.options.setIntervals);
                 })
             }else{
@@ -126,19 +126,19 @@
         },
         _carousel:function(){
             var self = this;
-            var $left = parseInt($(".klCarousel-box").css('margin-left'));
+            var $left = parseInt(self.options.el.find(".klCarousel-box").css('margin-left'));
             if ($left > (-parseInt(self.options.imgWidth) * (self.options.imgArr.length - 1))) {
                 $left -= parseInt(self.options.imgWidth);
-                $(".klCarousel-box").animate({marginLeft:$left+'px'},self.options.imgTime);
-                $('.klIndex-index') ? $('.klIndex-index').eq(-($left / parseInt(self.options.imgWidth))).addClass('klactive').siblings().removeClass('klactive') : false;
+                self.options.el.find(".klCarousel-box").animate({marginLeft:$left+'px'},self.options.imgTime);
+                self.options.el.find('.klIndex-index') ? self.options.el.find('.klIndex-index').eq(-($left / parseInt(self.options.imgWidth))).addClass('klactive').siblings().removeClass('klactive') : false;
             }else if ($left == (-parseInt(self.options.imgWidth) * (self.options.imgArr.length - 1))) {
                 $left = '0px';
-                $(".klCarousel-box").animate({marginLeft:$left},self.options.imgTime);
-                $('.klIndex-index') ? $('.klIndex-index').eq(0).addClass('klactive').siblings().removeClass('klactive') : false;
+                self.options.el.find(".klCarousel-box").animate({marginLeft:$left},self.options.imgTime);
+                self.options.el.find('.klIndex-index') ? self.options.el.find('.klIndex-index').eq(0).addClass('klactive').siblings().removeClass('klactive') : false;
             }else{
                 $left = '0px';
-                $(".klCarousel-box").animate({marginLeft:$left},self.options.imgTime);
-                $('.klIndex-index') ? $('.klIndex-index').eq(0).addClass('klactive').siblings().removeClass('klactive') : false;
+                self.options.el.find(".klCarousel-box").animate({marginLeft:$left},self.options.imgTime);
+                self.options.el.find('.klIndex-index') ? self.options.el.find('.klIndex-index').eq(0).addClass('klactive').siblings().removeClass('klactive') : false;
             }
         }
     });
